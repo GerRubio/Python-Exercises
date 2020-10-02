@@ -1,4 +1,4 @@
-# 1. PRÁCTICA OPERACIONES.
+# 1. PRÁCTICA DE OPERACIONES ARITMÉTICAS.
 
 # Calcular la aproximación al seno de un ángulo X expresado en grados.
 
@@ -14,3 +14,9 @@ denominator = 40500 - x * parenthesis_1
 sin = numerator / denominator
 
 print(sin)
+
+# 2. PRÁCTICA DE CAMBIO DE BASE.
+
+value = '0x3f81'
+
+print(int(value, 16))
