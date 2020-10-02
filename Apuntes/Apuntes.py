@@ -19,4 +19,12 @@ print(sin)
 
 value = '0x3f81'
 
-print(int(value, 16))
+v_int = int(value, 16)
+v_bin = bin(v_int)
+v_oct = oct(v_int)
+v_hex = hex(v_int)
+
+print(v_int)
+print(v_bin)
+print(v_oct)
+print(v_hex)
