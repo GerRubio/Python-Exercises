@@ -1,2 +1,2 @@
 # Python
-Repository with Python notes.
+Repository with Python notes and exercices.
