@@ -6,4 +6,4 @@ field_width = float(input('Width of the field (square feet): '))
 field_area_in_feet = field_length * field_width
 field_area_in_acres = field_area_in_feet * SQFEET_TO_ACRES
 
-print(field_area_in_acres, 'acres')
+print(round(field_area_in_acres, 3), 'acres.')
