@@ -2,6 +2,7 @@ TAX_RATE = 0.07
 TIP_RATE = 0.05
 
 meal_cost = float(input('Please input the cost of the meal: '))
+
 tip = meal_cost * TIP_RATE
 tax = meal_cost * TAX_RATE
 total_cost = meal_cost + tip + tax
