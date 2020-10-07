@@ -28,3 +28,7 @@ print(v_int)
 print(v_bin)
 print(v_oct)
 print(v_hex)
+
+# 3. Prueba divmod()
+dividend, divider = divmod(7, 3)
+print(dividend, divider)
