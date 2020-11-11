@@ -6,7 +6,7 @@ This repository contains some exercises done in Python divided by categories, in
 - Dictionaries and Sets.
 - Files, modules and packages.
 - Functions.
-- Bibraries examples.
+- Libraries examples.
 - Loops.
 - Numbers.
 - Objects and Classes.
