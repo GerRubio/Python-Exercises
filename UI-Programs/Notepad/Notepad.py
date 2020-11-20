@@ -9,24 +9,39 @@ file_path = None
 app = QApplication([])
 
 app.setApplicationName('C-LM Pad')
-app.setWindowIcon(QtGui.QIcon('/home/gerardo/Python/Ejercicios/Python-Exercises/UI-Programs/Notepad/notepad_icon.png'))
+app.setWindowIcon(QtGui.QIcon('notepad_icon.png'))
+
+def show_confirmation_dialog():
+    return QMessageBox.question(
+        window_area,
+        'Confirmation', 
+        'You have changes without save. Are you sure?',
+        QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel,
+        QMessageBox.Save
+    )
+
+def save_if_modified():
+    if text_area.document().isModified():
+        answer = show_confirmation_dialog()
+        
+        if answer == QMessageBox.Save:
+            save_file()
+            
+            return False
+        elif answer == QMessageBox.Cancel:
+            return False
+    
+    return True
 
 class MainWindow(QMainWindow):
     def closeEvent(self, evt):
-        answer = QMessageBox.question(
-            window_area,
-            'Confirmation', 
-            'You have changes without save. Are you sure?',
-            QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel,
-            QMessageBox.Save
-        )
-
-        if answer == QMessageBox.Save:
-            save_file()
-        elif answer == QMessageBox.Discard:
-            evt.accept()
-        else:
-            evt.ignore()
+        if text_area.document().isModified():
+            answer = show_confirmation_dialog()
+                
+            if answer == QMessageBox.Save:
+                save_file()
+            elif answer == QMessageBox.Cancel:
+                evt.ignore()
 
 text_area = QPlainTextEdit() 
 window_area = MainWindow()
@@ -47,6 +62,9 @@ close_action = QAction('&Close')
 def show_open_dialog():
     global file_path
     
+    if not save_if_modified():
+        return
+
     file_name, _ = QFileDialog.getOpenFileName(
         window_area, 
         'Open fle...', 
@@ -74,30 +92,37 @@ def show_save_dialog():
         with open(file_name, 'w') as f:
             f.write(text_area.toPlainText()) 
         
+        text_area.document().setModified(False)
+
         file_path = file_name
+
+def show_about_dialog():
+    text_info = """ 
+        C-LM Pad
+
+        Version 1.0.0
+
+        Copyright EOI 2020        
+    """
+    
+    QMessageBox.about(window_area, 'About', text_info)
 
 def new_file():
     global file_path
     
-    text_area.clear()
+    if save_if_modified():
+        text_area.clear()
 
-    file_path = None
+        file_path = None
 
 def save_file():
     if file_path:
         with open(file_path, 'w') as f:
             f.write(text_area.toPlainText())
+        
+        text_area.document().setModified(False)
     else:
         show_save_dialog()
-
-def show_about_dialog():
-    text_info = """   
-        <h2>C-LM Pad</h2>
-        <h4>Version 0.0.1</h4>
-        <p>Copyright EOI 2020<p>       
-    """
-    
-    QMessageBox.about(window_area, 'About C-LM Pad...', text_info)
 
 new_action.triggered.connect(new_file)
 new_action.setShortcut(QKeySequence.New)
