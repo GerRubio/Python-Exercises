@@ -17,7 +17,7 @@ def modified_file():
 def full_directory_size():
     total_size = 0
 
-    for iterator in os.walk("."):
+    for iterator in os.walk('.'):
         dir_path, _, files = iterator
     
         for file_name in files:
@@ -52,7 +52,7 @@ def gauss_simulation():
     
     min(simulation), max(simulation)
     
-    plt.hist(simulation, bins = 80, color = "#888888")
+    plt.hist(simulation, bins = 80, color = '#888888')
     plt.show()
 
 # Random dices.
