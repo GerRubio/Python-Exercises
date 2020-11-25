@@ -7,6 +7,7 @@ extensions = ('.html', '.py', '.txt', '.jpg', '.png')
 week_days = datetime.datetime.today().weekday()
 
 files_list = []
+files_names = []
 files_sizes = []
 average_size = 0
 total_time = 0
@@ -16,6 +17,9 @@ for root, dirs, files in os.walk('.'):
     for file in files:
         if file.endswith(extensions):
             files_list.append(os.path.join(root, file))
+            
+            # Gets the name of the files.
+            files_names.append(file)
     
 # Compression mode.
 compression = zipfile.ZIP_DEFLATED
@@ -93,7 +97,7 @@ else:
 # Results.
 print(f'Compressed files:')
 
-for files in files_list:
+for files in files_names:
     print(files)
 
 print('')  
